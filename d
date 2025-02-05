@@ -1,316 +1,184 @@
--- Gui to Lua
--- Version: 3.2
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- Instances:
+local Window = Rayfield:CreateWindow({
+   Name = "Superior Hub | OP",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "LUCKY BLOCK Battlegrounds",
+   LoadingSubtitle = "by Superior's Hub",
+   Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
-local ScreenGui = Instance.new("ScreenGui")
-local Main = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local Frame = Instance.new("Frame")
-local UICorner_2 = Instance.new("UICorner")
-local TextLabel = Instance.new("TextLabel")
-local Frame_2 = Instance.new("Frame")
-local UICorner_3 = Instance.new("UICorner")
-local TextLabel_2 = Instance.new("TextLabel")
-local TextLabel_3 = Instance.new("TextLabel")
-local LuckyBlock = Instance.new("TextButton")
-local UICorner_4 = Instance.new("UICorner")
-local SuperBlock = Instance.new("TextButton")
-local UICorner_5 = Instance.new("UICorner")
-local DiamondBlock = Instance.new("TextButton")
-local UICorner_6 = Instance.new("UICorner")
-local RainbowBlock = Instance.new("TextButton")
-local UICorner_7 = Instance.new("UICorner")
-local GalaxyBlock = Instance.new("TextButton")
-local UICorner_8 = Instance.new("UICorner")
-local GetAdmin = Instance.new("TextButton")
-local UICorner_9 = Instance.new("UICorner")
-local Fly = Instance.new("TextButton")
-local UICorner_10 = Instance.new("UICorner")
-local LoadSuperiorsHub = Instance.new("TextButton")
-local UICorner_11 = Instance.new("UICorner")
-local Frame_3 = Instance.new("Frame")
-local Frame_4 = Instance.new("Frame")
-local UICorner_12 = Instance.new("UICorner")
-local OpenClose = Instance.new("TextButton")
-local UICorner_13 = Instance.new("UICorner")
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
 
---Properties:
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.ResetOnSpawn = false
+   Discord = {
+      Enabled = true, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "https://discord.com/invite/SZHe5qV3eX", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
 
-Main.Name = "Main"
-Main.Parent = ScreenGui
-Main.BackgroundColor3 = Color3.fromRGB(3, 3, 3)
-Main.BorderColor3 = Color3.fromRGB(170, 0, 127)
-Main.BorderSizePixel = 10
-Main.Position = UDim2.new(0.287170768, 0, 0.0640495867, 0)
-Main.Size = UDim2.new(0, 593, 0, 382)
-Main.Active = true
-Main.Draggable = true
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
 
-UICorner.Parent = Main
+local MainTab = Window:CreateTab("🎁Main", nil) -- Title, Image
+local UniversalTab = Window:CreateTab("🎮Universal", nil) -- Title, Image
+local CreditsTab = Window:CreateTab("🔨Credits", nil) -- Title, Image
+local MainSection = MainTab:CreateSection("Lucky Block")
+local UniversalSection = UniversalTab:CreateSection("Player Controls")
+local CreditsSection = CreditsTab:CreateSection("Creators")
 
-Frame.Parent = Main
-Frame.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
-Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame.BorderSizePixel = 0
-Frame.Size = UDim2.new(0, 593, 0, 382)
+local Button1 = MainTab:CreateButton({
+   Name = "🎁 = Spawn Lucky Block = 🎁",
+   Callback = function()
+   game:GetService("ReplicatedStorage").SpawnLuckyBlock:FireServer()
+   end,
+})
 
-UICorner_2.Parent = Frame
+local Button2 = MainTab:CreateButton({
+   Name = "🎁 = Spawn Super Block = 🎁",
+   Callback = function()
+   game:GetService("ReplicatedStorage").SpawnSuperBlock:FireServer()
+   end,
+})
 
-TextLabel.Parent = Main
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0.0370994955, 0, -0.0157068055, 0)
-TextLabel.Size = UDim2.new(0, 364, 0, 34)
-TextLabel.Font = Enum.Font.Unknown
-TextLabel.Text = "Superior's Hub : ‼️LUCKY BLOCKS Battlegrounds"
-TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 14.000
-TextLabel.TextWrapped = true
+local Button3 = MainTab:CreateButton({
+   Name = "🎁 = Spawn Diamond Block = 🎁",
+   Callback = function()
+   game:GetService("ReplicatedStorage").SpawnDiamondBlock:FireServer()
+   end,
+})
 
-Frame_2.Parent = Main
-Frame_2.BackgroundColor3 = Color3.fromRGB(3, 3, 3)
-Frame_2.BorderColor3 = Color3.fromRGB(170, 0, 127)
-Frame_2.BorderSizePixel = 10
-Frame_2.Position = UDim2.new(0.00168634066, 0, 0.0751914755, 0)
-Frame_2.Size = UDim2.new(0, 592, 0, 353)
+local Button4 = MainTab:CreateButton({
+   Name = "🎁 = Spawn Rainbow Block = 🎁",
+   Callback = function()
+   game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
+   end,
+})
 
-UICorner_3.Parent = Frame_2
+local Divider = MainTab:CreateDivider()
+local Label = MainTab:CreateLabel("🔥(OP)🐦‍🔥", nil, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
 
-TextLabel_2.Parent = Frame_2
-TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.BackgroundTransparency = 1.000
-TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_2.BorderSizePixel = 0
-TextLabel_2.Position = UDim2.new(0.0270270277, 0, 0, 0)
-TextLabel_2.Size = UDim2.new(0, 286, 0, 36)
-TextLabel_2.Font = Enum.Font.FredokaOne
-TextLabel_2.Text = "GUI & Script Made By: Superior's Hub"
-TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.TextScaled = true
-TextLabel_2.TextSize = 14.000
-TextLabel_2.TextWrapped = true
+local Button5 = MainTab:CreateButton({
+   Name = "🎁 = Spawn Galaxy Block = 🎁",
+   Callback = function()
+   game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+   end,
+})
 
-TextLabel_3.Parent = Frame_2
-TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_3.BackgroundTransparency = 1.000
-TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_3.BorderSizePixel = 0
-TextLabel_3.Position = UDim2.new(0.239864871, 0, 0.101983003, 0)
-TextLabel_3.Size = UDim2.new(0, 286, 0, 36)
-TextLabel_3.Font = Enum.Font.FredokaOne
-TextLabel_3.Text = "(OP) 🎁 Lucky Block"
-TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_3.TextScaled = true
-TextLabel_3.TextSize = 14.000
-TextLabel_3.TextWrapped = true
+Button5:Set("Bypasses Gamepass")
 
-LuckyBlock.Name = "LuckyBlock"
-LuckyBlock.Parent = Frame_2
-LuckyBlock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-LuckyBlock.BackgroundTransparency = 0.999
-LuckyBlock.BorderColor3 = Color3.fromRGB(229, 229, 229)
-LuckyBlock.BorderSizePixel = 3
-LuckyBlock.Position = UDim2.new(0.0371621624, 0, 0.254957497, 0)
-LuckyBlock.Size = UDim2.new(0, 200, 0, 50)
-LuckyBlock.Font = Enum.Font.FredokaOne
-LuckyBlock.Text = "🎁 = Spawn Lucky Block = 🎁"
-LuckyBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
-LuckyBlock.TextSize = 14.000
-LuckyBlock.MouseButton1Down:connect(function()
-	game:GetService("ReplicatedStorage").SpawnLuckyBlock:FireServer()
+local Button5 = MainTab:CreateButton({
+   Name = "🎁 = Spawn Galaxy Block = 🎁",
+   Callback = function()
+   game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
+   end,
+})
+
+local Button6 = MainTab:CreateButton({
+   Name = "🎁 = Get ADMIN = 🎁",
+   Callback = function()
+   loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+   end,
+})
+
+local Toggle = UniversalTab:CreateToggle({
+   Name = "OP Autoclicker",
+   CurrentValue = false,
+   Flag = "Toggle2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      --[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+getgenv().key = "Hostile"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/The-telligence/main/MC%20KSystem%202"))()
+   end,
+})
+
+local Divider2 = UniversalTab:CreateDivider()
+
+local Slider = UniversalTab:CreateSlider({
+   Name = "WalkSpeed Changer",
+   Range = {0, 200},
+   Increment = 10,
+   Suffix = "Speed",
+   CurrentValue = 10,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      -- The function that takes place when the slider changes
+      -- Set the player's walk speed to the value of the slider
+      game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+   end,
+})
+
+local Slider2 = UniversalTab:CreateSlider({
+   Name = "Jumppower Changer",
+   Range = {0, 300},
+   Increment = 10,
+   Suffix = "JumpPower",
+   CurrentValue = 10,
+   Flag = "Slider2", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      -- The function that takes place when the slider changes
+      -- Set the player's jump power to the value of the slider
+      game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+   end,
+})
+
+local ButtonOn = UniversalTab:CreateButton({
+   Name = "Infinite Jump (TURN ON)",
+   Callback = function()
+   -- Infinite Jump Script by Ashborn
+-- Discord: ashbornthegoat
+
+-- Services
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+-- Get the local player and their character
+local localPlayer = Players.LocalPlayer
+local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Infinite jump logic
+UserInputService.JumpRequest:Connect(function()
+    if humanoid then
+        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+    end
 end)
+   end,
+})
 
-UICorner_4.Parent = LuckyBlock
+local ButtonOff = UniversalTab:CreateButton({
+   Name = "Infinite Jump (TURN OFF 'will reset character')",
+   Callback = function()
+local function forceResetAction()
+    local player = game.Players.LocalPlayer
+    if player.Character and player.Character:FindFirstChild("Humanoid") then
+        player.Character.Humanoid.Health = 0
+    end
+end
+   end,
+})
 
-SuperBlock.Name = "SuperBlock"
-SuperBlock.Parent = Frame_2
-SuperBlock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SuperBlock.BackgroundTransparency = 0.999
-SuperBlock.BorderColor3 = Color3.fromRGB(229, 229, 229)
-SuperBlock.BorderSizePixel = 3
-SuperBlock.Position = UDim2.new(0.0371621624, 0, 0.44475922, 0)
-SuperBlock.Size = UDim2.new(0, 200, 0, 50)
-SuperBlock.Font = Enum.Font.FredokaOne
-SuperBlock.Text = "🎁 = Spawn Super Block = 🎁"
-SuperBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
-SuperBlock.TextSize = 14.000
-SuperBlock.MouseButton1Down:connect(function()
-	game:GetService("ReplicatedStorage").SpawnSuperBlock:FireServer()
-end)
+local FlyButton = UniversalTab:CreateButton({
+   Name = "FLY GUI V3",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+   end,
+})
 
-UICorner_5.Parent = SuperBlock
-
-DiamondBlock.Name = "Diamond Block"
-DiamondBlock.Parent = Frame_2
-DiamondBlock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-DiamondBlock.BackgroundTransparency = 0.999
-DiamondBlock.BorderColor3 = Color3.fromRGB(229, 229, 229)
-DiamondBlock.BorderSizePixel = 3
-DiamondBlock.Position = UDim2.new(0.0354729742, 0, 0.637393773, 0)
-DiamondBlock.Size = UDim2.new(0, 200, 0, 50)
-DiamondBlock.Font = Enum.Font.FredokaOne
-DiamondBlock.Text = "🎁 = Spawn Diamond Block = 🎁"
-DiamondBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
-DiamondBlock.TextSize = 14.000
-DiamondBlock.MouseButton1Down:connect(function()
-	game:GetService("ReplicatedStorage").SpawnDiamondBlock:FireServer()
-end)
-
-UICorner_6.Parent = DiamondBlock
-
-RainbowBlock.Name = "Rainbow Block"
-RainbowBlock.Parent = Frame_2
-RainbowBlock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-RainbowBlock.BackgroundTransparency = 0.999
-RainbowBlock.BorderColor3 = Color3.fromRGB(229, 229, 229)
-RainbowBlock.BorderSizePixel = 3
-RainbowBlock.Position = UDim2.new(0.0371621624, 0, 0.821529746, 0)
-RainbowBlock.Size = UDim2.new(0, 200, 0, 50)
-RainbowBlock.Font = Enum.Font.FredokaOne
-RainbowBlock.Text = "🎁 = Spawn Rainbow Block = 🎁"
-RainbowBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
-RainbowBlock.TextSize = 14.000
-RainbowBlock.MouseButton1Down:connect(function()
-	game:GetService("ReplicatedStorage").SpawnRainbowBlock:FireServer()
-end)
-
-UICorner_7.Parent = RainbowBlock
-
-GalaxyBlock.Name = "Galaxy Block"
-GalaxyBlock.Parent = Frame_2
-GalaxyBlock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-GalaxyBlock.BackgroundTransparency = 0.999
-GalaxyBlock.BorderColor3 = Color3.fromRGB(229, 229, 229)
-GalaxyBlock.BorderSizePixel = 3
-GalaxyBlock.Position = UDim2.new(0.614864886, 0, 0.254957497, 0)
-GalaxyBlock.Size = UDim2.new(0, 200, 0, 50)
-GalaxyBlock.Font = Enum.Font.FredokaOne
-GalaxyBlock.Text = "🎁 = Spawn Galaxy Block = 🎁"
-GalaxyBlock.TextColor3 = Color3.fromRGB(255, 255, 255)
-GalaxyBlock.TextSize = 14.000
-GalaxyBlock.TextWrapped = true
-GalaxyBlock.MouseButton1Down:connect(function()
-	game:GetService("ReplicatedStorage").SpawnGalaxyBlock:FireServer()
-end)
-
-UICorner_8.Parent = GalaxyBlock
-
-GetAdmin.Name = "GetAdmin"
-GetAdmin.Parent = Frame_2
-GetAdmin.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-GetAdmin.BackgroundTransparency = 0.999
-GetAdmin.BorderColor3 = Color3.fromRGB(229, 229, 229)
-GetAdmin.BorderSizePixel = 3
-GetAdmin.Position = UDim2.new(0.614864886, 0, 0.44475922, 0)
-GetAdmin.Size = UDim2.new(0, 200, 0, 50)
-GetAdmin.Font = Enum.Font.FredokaOne
-GetAdmin.Text = "🎁 = Get Admin = 🎁"
-GetAdmin.TextColor3 = Color3.fromRGB(255, 255, 255)
-GetAdmin.TextSize = 14.000
-GetAdmin.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
-end)
-
-UICorner_9.Parent = GetAdmin
-
-Fly.Name = "Fly"
-Fly.Parent = Frame_2
-Fly.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Fly.BackgroundTransparency = 0.999
-Fly.BorderColor3 = Color3.fromRGB(229, 229, 229)
-Fly.BorderSizePixel = 3
-Fly.Position = UDim2.new(0.614864886, 0, 0.637393773, 0)
-Fly.Size = UDim2.new(0, 200, 0, 50)
-Fly.Font = Enum.Font.FredokaOne
-Fly.Text = "🎁 = Fly = 🎁"
-Fly.TextColor3 = Color3.fromRGB(255, 255, 255)
-Fly.TextSize = 14.000
-Fly.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
-end)
-
-UICorner_10.Parent = Fly
-
-LoadSuperiorsHub.Name = "Load Superior's Hub"
-LoadSuperiorsHub.Parent = Frame_2
-LoadSuperiorsHub.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-LoadSuperiorsHub.BackgroundTransparency = 0.999
-LoadSuperiorsHub.BorderColor3 = Color3.fromRGB(229, 229, 229)
-LoadSuperiorsHub.BorderSizePixel = 3
-LoadSuperiorsHub.Position = UDim2.new(0.614864886, 0, 0.821529746, 0)
-LoadSuperiorsHub.Size = UDim2.new(0, 200, 0, 50)
-LoadSuperiorsHub.Font = Enum.Font.FredokaOne
-LoadSuperiorsHub.Text = "Load Superior's Hub Lucky Blocks"
-LoadSuperiorsHub.TextColor3 = Color3.fromRGB(255, 255, 255)
-LoadSuperiorsHub.TextSize = 14.000
-LoadSuperiorsHub.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet(('https://raw.githubusercontent.com/idkevenknowburh/source/refs/heads/main/main1'),true))()
-end)
-
-UICorner_11.Parent = LoadSuperiorsHub
-
-Frame_3.Parent = Main
-Frame_3.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
-Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_3.BorderSizePixel = 0
-Frame_3.Position = UDim2.new(0.403035402, 0, 0.292468965, 0)
-Frame_3.Size = UDim2.new(0, 114, 0, 270)
-
-Frame_4.Parent = Main
-Frame_4.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
-Frame_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_4.BorderSizePixel = 0
-Frame_4.Position = UDim2.new(0, 0, 0.292468965, 0)
-Frame_4.Size = UDim2.new(0, 593, 0, -11)
-
-UICorner_12.Parent = Frame_4
-
--- Setup the OpenClose button
-OpenClose.Name = "OpenClose"
-OpenClose.Parent = ScreenGui
-OpenClose.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
-OpenClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
-OpenClose.BorderSizePixel = 0
-OpenClose.Position = UDim2.new(0.0212404411, 0, 0.342975199, 0)
-OpenClose.Size = UDim2.new(0, 81, 0, 67)
-OpenClose.Font = Enum.Font.Unknown  -- Consider changing this to Enum.Font.SourceSans for a cleaner look
-OpenClose.Text = "Lucky Block GUI"
-OpenClose.TextColor3 = Color3.fromRGB(255, 255, 255)
-OpenClose.TextScaled = true
-OpenClose.TextSize = 14.000
-OpenClose.TextWrapped = true
--- Setup the OpenClose button
-OpenClose.Name = "OpenClose"
-OpenClose.Parent = ScreenGui
-OpenClose.BackgroundColor3 = Color3.fromRGB(0, 85, 255)
-OpenClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
-OpenClose.BorderSizePixel = 0
-OpenClose.Position = UDim2.new(0.0212404411, 0, 0.342975199, 0)
-OpenClose.Size = UDim2.new(0, 81, 0, 67)
-OpenClose.Font = Enum.Font.Unknown  -- You can change this to Enum.Font.SourceSans for better readability
-OpenClose.Text = "Lucky Block GUI"
-OpenClose.TextColor3 = Color3.fromRGB(255, 255, 255)
-OpenClose.TextScaled = true
-OpenClose.TextSize = 14.000
-OpenClose.TextWrapped = true
-OpenClose.MouseButton1Click:Connect(function()
-	local mainFrame = ScreenGui:FindFirstChild("Main")  -- Find the Main frame directly under the ScreenGui
-
-	if mainFrame then
-		-- Toggle the visibility of the "Main" frame
-		mainFrame.Visible = not mainFrame.Visible
-	else
-		warn("Main frame not found!")  -- Optional: Debugging line if the frame isn't found
-	end
-end)
-
-
-UICorner_13.Parent = OpenClose
+Rayfield:LoadConfiguration()
