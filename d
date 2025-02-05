@@ -71,6 +71,8 @@ local Button4 = MainTab:CreateButton({
 
 local Divider = MainTab:CreateDivider()
 local Label = MainTab:CreateLabel("🔥(OP)🐦‍🔥", nil, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+local Label1 = CreditsTab:CreateLabel("UI Creator - Superior", nil, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+local Label2 = CreditsTab:CreateLabel("Scripter - rv_crips", nil, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
 
 local Button5 = MainTab:CreateButton({
    Name = "🎁 = Spawn Galaxy Block = 🎁",
